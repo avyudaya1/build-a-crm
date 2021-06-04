@@ -1,6 +1,14 @@
 from django import forms
-
-class LeadForm(forms.Form):
-  first_name = forms.CharField()
-  last_name = forms.CharField()
-  age = forms.IntegerField(min_value=0)
+from django.forms import fields
+from .models import Lead
+class LeadModelForm(forms.ModelForm):
+  field_order = ['first_name', 'last_name', 'age', 'agent']
+  
+  class Meta:
+    model = Lead
+    fields = {
+      'first_name',
+      'last_name',
+      'age',
+      'agent'
+    }
