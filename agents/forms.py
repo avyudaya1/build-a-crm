@@ -1,9 +1,15 @@
 from django import forms
-from leads.models import Agent
+from django.contrib.auth import get_user_model
+from django.contrib.auth.forms import UserCreationForm
 
+User = get_user_model()
 class AgentModelForm(forms.ModelForm):
+  field_order = ['first_name', 'last_name', 'username', 'email']
   class Meta:
-    model = Agent
+    model = User
     fields = {
-      'user'
+      'email',
+      'username',
+      'first_name',
+      'last_name'
     }
