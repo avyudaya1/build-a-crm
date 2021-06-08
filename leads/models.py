@@ -37,6 +37,7 @@ class Agent(models.Model):
 
 class Category(models.Model):
     name = models.CharField(max_length=30) # New, Contacted, Converted, Unconverted
+    organisation = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
@@ -45,6 +46,6 @@ class Category(models.Model):
 def post_user_created_signal(sender, instance, created, **kwargs):
     if created:
         UserProfile.objects.create(user=instance)
-
+ 
 
 post_save.connect(post_user_created_signal, sender=User)
